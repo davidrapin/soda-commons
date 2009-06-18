@@ -3,11 +3,10 @@ package com.soda.utils;
 import java.text.Normalizer;
 
 /**
- * User: david rapin
- * Date: 2 juin 2009
- * Time: 16:32:02
+ * @author david rapin
  */
-public class StringUtils {
+public class StringUtils
+{
 
     protected StringUtils() {}
 
@@ -16,7 +15,8 @@ public class StringUtils {
      * @return a new string in which all accentuated characters from <code>str</code> have been replaced
      *         by their unaccentuated equivalent.
      */
-    public static String removeAccentuation(String str) {
+    public static String removeAccentuation(String str)
+    {
         // trivial cases (null, empty or simple string)
         if (str == null || str.isEmpty() || str.matches("[\\w\\s\\.\\,\\;\\:\\!\\?\\+]*")) return str;
 
@@ -35,10 +35,14 @@ public class StringUtils {
      * @param maxSize the maximum size the result string should have. must be greater than zero.
      * @return a new string truncated a <code>maxSize</code> characters if necessary
      */
-    public static String truncate(String str, int maxSize) {
-        if (str != null && maxSize >= 0 && str.length() > maxSize) {
+    public static String truncate(String str, int maxSize)
+    {
+        if (str != null && maxSize >= 0 && str.length() > maxSize)
+        {
             return str.substring(0, maxSize);
-        } else {
+        }
+        else
+        {
             return str;
         }
     }
@@ -48,7 +52,8 @@ public class StringUtils {
      * @param times the number of times <code>str</code> must be repeated
      * @return a new string consisting of <code>times</code> concatenations of <code>str</code>
      */
-    public static String repeat(String str, int times) {
+    public static String repeat(String str, int times)
+    {
         // trivial cases
         if (str == null || str.isEmpty()) return str;
 
@@ -63,7 +68,8 @@ public class StringUtils {
      * @return <code>replacement</code> if <code>str</code> is null or empty,<br>
      *         <code>str</code> otherwise.
      */
-    public static String replaceNullOrEmpty(String str, String replacement) {
+    public static String replaceNullOrEmpty(String str, String replacement)
+    {
         return str == null || str.isEmpty() ? replacement : str;
     }
 
@@ -73,13 +79,14 @@ public class StringUtils {
      * @param str a string (may be null or empty)
      * @return the content of <code>str</code> escaped for XML ('<', '>' and '&' escaped)
      */
-    public static String escapeXML(String str) {
+    public static String escapeXML(String str)
+    {
         if (str == null || str.isEmpty()) return str;
         return str
-                //.replaceAll("&(?!#\\d{2,3}|[A-Za-z0-9]{2,6})", "&amp;");
-                .replaceAll("&", "&amp;")
-                .replaceAll("<", "&lt;")
-                .replaceAll(">", "&gt;");
+            //.replaceAll("&(?!#\\d{2,3}|[A-Za-z0-9]{2,6})", "&amp;");
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;");
     }
 
     /**
@@ -87,16 +94,17 @@ public class StringUtils {
      * @return an HTML string where some characters from <code>email</code> have been replaced
      *         by HTML entities, in hope of fooling naive spambots.
      */
-    public static String obfuscateHtmlEmail(String email) {
+    public static String obfuscateHtmlEmail(String email)
+    {
         if (email == null || email.isEmpty()) return email;
         return email
-                .replaceAll("[:]", "&#58;")
-                .replaceAll("[-]", "&#45;")
-                .replaceAll("[.]", "&#46;")
-                .replaceAll("@", "&#64;")
-                .replaceAll("a", "&#97;")
-                .replaceAll("e", "&#101;")
-                .replaceAll("i", "&#105;")
-                .replaceAll("o", "&#111;");
+            .replaceAll("[:]", "&#58;")
+            .replaceAll("[-]", "&#45;")
+            .replaceAll("[.]", "&#46;")
+            .replaceAll("@", "&#64;")
+            .replaceAll("a", "&#97;")
+            .replaceAll("e", "&#101;")
+            .replaceAll("i", "&#105;")
+            .replaceAll("o", "&#111;");
     }
 }

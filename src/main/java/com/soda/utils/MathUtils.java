@@ -1,22 +1,22 @@
 package com.soda.utils;
 
 /**
- * User: david rapin
- * Date: 2 juin 2009
- * Time: 17:09:15
+ * @author david rapin
  */
-public class MathUtils {
+public class MathUtils
+{
 
     protected MathUtils() {}
 
     /**
      * @param min the mininum returned value
      * @param max the maxinum returned value
-     * @return a random integer between <code>min</code> and <code>max</code> (both included) 
+     * @return a random integer between <code>min</code> and <code>max</code> (both included)
      */
-    public static int randBetween(int min, int max) {
+    public static int randBetween(int min, int max)
+    {
         if (max < min) throw new IllegalArgumentException("'max' < 'min' is not legal");
-        return (int) (Math.random()*(max - min) + min);
+        return (int) (Math.random() * (max - min) + min);
     }
 
     /**
@@ -25,7 +25,8 @@ public class MathUtils {
      *         <code>number</code> itself otherwise.
      */
     @SuppressWarnings({"unchecked"})
-    public static <T extends Number> T ifNullZero(T number) {
+    public static <T extends Number> T ifNullZero(T number)
+    {
         return (T) ((number == null) ? 0 : number);
     }
 }

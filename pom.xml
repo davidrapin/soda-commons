@@ -3,20 +3,39 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.soda</groupId>
     <artifactId>soda-commons</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <name>soda commons</name>
-    <url>http://code.google.com/p/soda-commons/</url>
-    <description>
-        A library of highly-tested production-ready Java utilities
-    </description>
+    <url>http://code.google.com/p/soda-commons</url>
+    <description>A library of highly-tested production-ready Java utilities</description>
+    <inceptionYear>2009</inceptionYear>
+
+    <developers>
+        <developer><name>david rapin</name></developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <scm>
         <connection>scm:svn:http://soda-commons.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://soda-commons.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://code.google.com/p/soda-commons/source/browse/</url>
     </scm>
+
+    <issueManagement>
+        <system>Google Code Issues Management</system>
+        <url>http://code.google.com/p/soda-commons/issues/list</url>
+    </issueManagement>
 
     <repositories>
         <!--repository>
@@ -24,7 +43,6 @@
             <name>Maven2 Central Repository</name>
             <url>http://repo1.maven.org/maven2/</url>
         </repository-->
-
         <repository>
             <id>maven2-repository.dev.java.net</id>
             <name>Java.net Repository for Maven</name>
@@ -68,11 +86,13 @@
 
        <!-- testng for ... testing -->
        <dependency>
-           <groupId>org.testng</groupId>
-           <artifactId>testng</artifactId>
-           <version>5.8</version>
-           <scope>test</scope>
-       </dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>5.8</version>
+            <type>jar</type>
+            <classifier>jdk15</classifier>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
