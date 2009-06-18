@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />
       <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -54,15 +55,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="org.testng:testng:5.8">
+      <library name="org.testng:testng:5.8:jdk15">
         <CLASSES>
-          <root url="jar://C:/Documents and Settings/poussmouss/.m2/repository/org/testng/testng/5.8/testng-5.8.jar!/" />
+          <root url="jar://C:/Documents and Settings/poussmouss/.m2/repository/org/testng/testng/5.8/testng-5.8-jdk15.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="jar://C:/Documents and Settings/poussmouss/.m2/repository/org/testng/testng/5.8/testng-5.8-javadoc.jar!/" />
+          <root url="jar://C:/Documents and Settings/poussmouss/.m2/repository/org/testng/testng/5.8/testng-5.8-jdk15-javadoc.jar!/" />
         </JAVADOC>
         <SOURCES>
-          <root url="jar://C:/Documents and Settings/poussmouss/.m2/repository/org/testng/testng/5.8/testng-5.8-sources.jar!/" />
+          <root url="jar://C:/Documents and Settings/poussmouss/.m2/repository/org/testng/testng/5.8/testng-5.8-jdk15-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
