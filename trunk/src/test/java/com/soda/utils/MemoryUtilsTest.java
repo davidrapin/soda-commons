@@ -3,19 +3,18 @@ package com.soda.utils;
 import org.testng.annotations.Test;
 
 /**
- * @auhor david rapin
+ * @author david rapin
  */
-public class MemoryUtilsTest
+public class MemoryUtilsTest extends BaseTest
 {
+
     @Test
-    public void fixCoverage()
-    {
+    public void coverageFix() {
         new MemoryUtils();
     }
 
     @Test
-    public void memoryTest()
-    {
-        assert MemoryUtils.diagnostic() != null; 
+    public void diagnostic() {
+        assert !MemoryUtils.diagnostic().isEmpty();
     }
 }
