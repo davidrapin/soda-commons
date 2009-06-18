@@ -1,11 +1,13 @@
 package com.soda.geodata;
 
+import com.soda.BaseTest;
 import org.testng.annotations.Test;
 
 /**
  * @author david rapin
  */
-public class CountriesTest {
+public class CountriesTest extends BaseTest
+{
 
     @Test
     public void fixCoverage()
@@ -25,7 +27,7 @@ public class CountriesTest {
 
     @Test
     public void getFrance() {
-        assert Country.get("FR").getNameFr().equalsIgnoreCase("FRANCE");
+        assert Country.get("FR").getNameFr().equalsIgnoreCase("FRANCE") || logError(Country.get("FR") + "");
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.soda.utils;
+package com.soda;
 
 import org.apache.log4j.Logger;
 
