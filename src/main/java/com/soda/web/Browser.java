@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @auhor david
+ * @author david rapin
  */
 public class Browser
 {
@@ -151,9 +151,7 @@ public class Browser
                 if (
                     // inclusion pattern is not null AND matches
                     b.userAgentInclusionPattern != null && b.userAgentInclusionPattern.matcher(userAgent).find()
-
                     &&
-
                     // exclusion pattern is null OR does not match
                     (b.userAgentExclusionPattern == null || !b.userAgentExclusionPattern.matcher(userAgent).find())
                     )
