@@ -1,6 +1,7 @@
 package com.soda.utils;
 
 import org.testng.annotations.Test;
+import com.soda.BaseTest;
 
 /**
  * @author david rapin
@@ -22,12 +23,14 @@ public class StringUtilsTest extends BaseTest
         String trivial = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789 ,;.";
         assert StringUtils.removeAccentuation(trivial).equals(trivial);
         // tricky
-        String tricky = "^¨~`°²";
+        String tricky = "\u005e\u00a8\u007e\u0060\u00b4";
         assert StringUtils.removeAccentuation(tricky).equals(tricky) || logError(StringUtils.removeAccentuation(tricky));
         // other
-        assert StringUtils
-                .removeAccentuation("Ô! là! le même, mais de l'autre côté. le goût ne me plaît pas.")
-                .equals("O! la! le meme, mais de l'autre cote. le gout ne me plait pas.");
+        String other = "\u00d4! l\u00e0! le m\u00eame, mais de l'autre c\u00f4t\u00e9. le go\u00fbt ne me pla\u00eet pas..";
+        assert StringUtils.removeAccentuation(other)
+                .equals("O! la! le meme, mais de l'autre cote. le gout ne me plait pas..")
+                || logError(StringUtils.removeAccentuation(other));
+
     }
 
     @Test

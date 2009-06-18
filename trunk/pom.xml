@@ -95,6 +95,11 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <!-- see http://docs.codehaus.org/display/MAVENUSER/POM+Element+for+Source+File+Encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
     <build>
         <plugins>
             <!-- compile -->
@@ -133,8 +138,6 @@
         </extensions>
 
     </build>
-
-
 
     <distributionManagement>
         <!--

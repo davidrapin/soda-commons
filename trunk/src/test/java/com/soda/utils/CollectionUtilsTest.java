@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.soda.BaseTest;
+
 /**
  * @author david rapin
  */
