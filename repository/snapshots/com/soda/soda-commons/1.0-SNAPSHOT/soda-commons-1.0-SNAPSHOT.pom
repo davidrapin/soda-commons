@@ -84,6 +84,13 @@
             <version>1.6.1</version>
         </dependency>
 
+       <!-- joda time -->
+       <dependency>
+           <groupId>joda-time</groupId>
+           <artifactId>joda-time</artifactId>
+           <version>1.6</version>
+       </dependency>
+
        <!-- testng for ... testing -->
        <dependency>
             <groupId>org.testng</groupId>
