@@ -107,4 +107,33 @@ public class StringUtils
             .replaceAll("i", "&#105;")
             .replaceAll("o", "&#111;");
     }
+
+    /**
+     * @param str the string we are removing the last char from
+     * @return <code>str</code> with the last char removed. if <code>str</code> is <code>null</code> or empty, chop(String) has no effect.
+     */
+    public static String chop(String str)
+    {
+        return (str != null && str.length() > 0) ? str.substring(0, str.length() - 1) : str;
+    }
+
+    /**
+     * @param str the string to shorten by one char
+     * @param expectedEnd the expected end of <code>str</code>
+     * @return str with the last char chopped off if <code>str</code> ends with <code>expectedEnd</code>, <code>str</code> itself otherwise
+     */
+    public static String chop(String str, char expectedEnd)
+    {
+        return (str != null && str.length() > 0 && str.endsWith(String.valueOf(expectedEnd))) ? str.substring(0, str.length() - 1) : str;
+    }
+
+    /**
+     * @param s the string to modify
+     * @return <code>s</code> with the first eltter capitalized
+     */
+    public static String capitalizeFirstLetter(String s)
+    {
+        if (s == null || s.isEmpty()) return s;
+        return s.length() == 1 ? s.toUpperCase() : s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
 }

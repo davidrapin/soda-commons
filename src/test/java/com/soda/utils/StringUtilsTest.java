@@ -10,12 +10,14 @@ public class StringUtilsTest extends BaseTest
 {
 
     @Test
-    public void coverageFix() {
+    public void coverageFix()
+    {
         new StringUtils();
     }
 
     @Test
-    public void removeAccentuation() {
+    public void removeAccentuation()
+    {
         // null or empty
         assert StringUtils.removeAccentuation("").equals("");
         assert StringUtils.removeAccentuation(null) == null;
@@ -27,14 +29,14 @@ public class StringUtilsTest extends BaseTest
         assert StringUtils.removeAccentuation(tricky).equals(tricky) || logError(StringUtils.removeAccentuation(tricky));
         // other
         String other = "\u00d4! l\u00e0! le m\u00eame, mais de l'autre c\u00f4t\u00e9. le go\u00fbt ne me pla\u00eet pas..";
-        assert StringUtils.removeAccentuation(other)
-                .equals("O! la! le meme, mais de l'autre cote. le gout ne me plait pas..")
-                || logError(StringUtils.removeAccentuation(other));
+        assert StringUtils.removeAccentuation(other).equals("O! la! le meme, mais de l'autre cote. le gout ne me plait pas..")
+               || logError(StringUtils.removeAccentuation(other));
 
     }
 
     @Test
-    public void truncate() {
+    public void truncate()
+    {
         // null and empty
         assert StringUtils.truncate("", 12).equals("");
         assert StringUtils.truncate(null, 12) == null;
@@ -49,7 +51,8 @@ public class StringUtilsTest extends BaseTest
     }
 
     @Test
-    public void repeat() {
+    public void repeat()
+    {
         // null and empty
         assert StringUtils.repeat("", 12).equals("");
         assert StringUtils.repeat(null, 12) == null;
@@ -63,7 +66,8 @@ public class StringUtilsTest extends BaseTest
     }
 
     @Test
-    public void replaceNullOrEmpty() {
+    public void replaceNullOrEmpty()
+    {
         // replace by random
         assert StringUtils.replaceNullOrEmpty("", "abc").equals("abc");
         assert StringUtils.replaceNullOrEmpty(null, "abc").equals("abc");
@@ -75,7 +79,8 @@ public class StringUtilsTest extends BaseTest
     }
 
     @Test
-    public void escapeXML() {
+    public void escapeXML()
+    {
         // null or empty
         assert StringUtils.escapeXML("").equals("");
         assert StringUtils.escapeXML(null) == null;
@@ -86,7 +91,8 @@ public class StringUtilsTest extends BaseTest
     }
 
     @Test
-    public void obfuscateEmail() {
+    public void obfuscateEmail()
+    {
         // null or empty
         assert StringUtils.obfuscateHtmlEmail("").equals("");
         assert StringUtils.obfuscateHtmlEmail(null) == null;
@@ -94,5 +100,34 @@ public class StringUtilsTest extends BaseTest
         assert !StringUtils.obfuscateHtmlEmail("jean-paul.machin@truc-chose.fr.st").contains("@");
         assert !StringUtils.obfuscateHtmlEmail("jean-paul.machin@truc-chose.fr.st").contains("-");
         assert !StringUtils.obfuscateHtmlEmail("jean-paul.machin@truc-chose.fr.st").contains(".");
+    }
+
+    @Test
+    public void capitalizeFirstLetter()
+    {
+        assert StringUtils.capitalizeFirstLetter(null) == null;
+        assert StringUtils.capitalizeFirstLetter("").equals("");
+        assert StringUtils.capitalizeFirstLetter("AA").equals("AA");
+        assert StringUtils.capitalizeFirstLetter("Aa").equals("Aa");
+        assert StringUtils.capitalizeFirstLetter(" a").equals(" a");
+        assert StringUtils.capitalizeFirstLetter("|a").equals("|a");
+        assert StringUtils.capitalizeFirstLetter("ea").equals("Ea");
+        assert StringUtils.capitalizeFirstLetter("i").equals("I");
+    }
+
+    @Test
+    public void chop()
+    {
+        assert StringUtils.chop(null) == null;
+        assert StringUtils.chop("").equals("");
+        assert StringUtils.chop("a").equals("");
+        assert StringUtils.chop("ab").equals("a");
+
+        assert StringUtils.chop(null, ' ') == null;
+        assert StringUtils.chop("a,b,", ',').equals("a,b");
+        assert StringUtils.chop("z", 'z').equals("");
+        assert StringUtils.chop("zzz", 'z').equals("zz");
+        assert StringUtils.chop("", 'z').equals("");
+
     }
 }

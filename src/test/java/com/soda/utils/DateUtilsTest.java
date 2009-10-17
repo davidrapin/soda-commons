@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author david rapin
@@ -83,5 +84,95 @@ public class DateUtilsTest extends BaseTest
     @Test
     public void beginningOfCurrentYear() {
         assert DateUtils.sameYear(new Date(), DateUtils.getBeginningOfYear());
+    }
+
+    @Test()
+    public void dateDiff()
+    {
+        // set a date 'D'
+        Calendar c1 = Calendar.getInstance();
+        c1.setTimeInMillis(1225636958785L);
+
+        // store: 10 days before 'D'
+        Date d1 = c1.getTime();
+        c1.add(Calendar.DAY_OF_YEAR, 10);
+
+        // store: 'D'
+        Date d2 = c1.getTime();
+
+        // diff in days
+        float diff_d = DateUtils.dateDiffInDays(d1,d2);
+        // diff in weeks
+        float diff_w = DateUtils.dateDiffInWeeks(d1,d2);
+
+        System.out.println("date1:" + d1 + " - date2:" + d2 + " - diff in days:" + diff_d + " - diff in weeks:" + diff_w );
+
+        assert (diff_d == 10F);
+        assert (diff_w == 10F/7F);
+    }
+
+    @Test()
+    public void weeksInYear()
+    {
+        assert DateUtils.weeksInYear(2003) == 52;
+        assert DateUtils.weeksInYear(2004) == 53;
+        assert DateUtils.weeksInYear(2008) == 52;
+        assert DateUtils.weeksInYear(2009) == 53;
+    }
+
+    @Test()
+    public void daysInYear()
+    {
+        assert DateUtils.daysInYear(2003) == 365;
+        assert DateUtils.daysInYear(2004) == 366;
+        assert DateUtils.daysInYear(2008) == 366;
+        assert DateUtils.daysInYear(2009) == 365;
+    }
+
+    @Test
+    public void datePush()
+    {
+        Date d1 = DateUtils.parseDate("31/12/2008");
+        Date d2 = DateUtils.newDateFrom(d1, Calendar.DAY_OF_YEAR, 1);
+        assert DateUtils.formatDate(d2).equals("01/01/2009");
+
+        d1 = DateUtils.parseDate("28/02/2003");
+        d2 = DateUtils.newDateFrom(d1, Calendar.DAY_OF_YEAR, 1);
+        assert DateUtils.formatDate(d2).equals("01/03/2003");
+    }
+
+    @Test
+    public void testFormatAndParse()
+    {
+        String d = "31/12/2003";
+        assert DateUtils.formatDate(DateUtils.parseDate(d)).equals(d);
+        assert DateUtils.formatDateTime(DateUtils.parseDate(d)).equals(d + " 00:00:00");
+        assert DateUtils.parseDate("a2a3a") == null;
+    }
+
+    @Test
+    public void testDurationToNow()
+    {
+        Date now = new Date();
+        Date d = DateUtils.newDateFrom(now, Calendar.DAY_OF_YEAR, -10);
+        assert DateUtils.durationToNow(d).equals("1 week and 3 days");
+        assert DateUtils.durationToNow(now).equals("moments");
+    }
+
+    @Test
+    public void testDaysSince()
+    {
+        Date now = new Date();
+        Date start = DateUtils.newDateFrom(now, Calendar.DAY_OF_YEAR, -15);
+        List<Date> days = DateUtils.daysSince(start);
+        int i = 0;
+
+        // all days, plus today
+        assert days.size() == 16;
+
+        for (Date check = days.get(0); check.before(now);  check = DateUtils.newDateFrom(check, Calendar.DAY_OF_YEAR, 1), i++)
+        {
+            assert days.get(i).equals(check);
+        }
     }
 }

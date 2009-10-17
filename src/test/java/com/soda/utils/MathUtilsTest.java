@@ -1,7 +1,10 @@
 package com.soda.utils;
 
-import org.testng.annotations.Test;
 import com.soda.BaseTest;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -30,14 +33,69 @@ public class MathUtilsTest extends BaseTest
             assert MathUtils.randBetween(12, 15) <= 15;
             assert MathUtils.randBetween(12, 15) >= 12;
         }
+        for (int i=0; i<1000; i++) {
+            assert MathUtils.randBetween(12F, 12F) == 12f;
+            assert MathUtils.randBetween(12F, 15F) <= 15f;
+            assert MathUtils.randBetween(12F, 15F) >= 12f;
+        }
+        for (int i=0; i<1000; i++) {
+            assert MathUtils.randBetween(12L, 12L) == 12L;
+            assert MathUtils.randBetween(12L, 15L) <= 15L;
+            assert MathUtils.randBetween(12L, 15L) >= 12L;
+        }
         
-        boolean ex = false;
         try {
             MathUtils.randBetween(21, 12);
-        } catch (Exception e) {
-            ex = true;
+            assert false;
+        } catch (Exception e) { /* empty */}
+
+        try {
+            MathUtils.randBetween(21F, 12F);
+            assert false;
+        } catch (Exception e) { /* empty */}
+
+        try {
+            MathUtils.randBetween(21L, 12L);
+            assert false;
+        } catch (Exception e) { /* empty */}
+    }
+
+    @Test
+    public void testConvert()
+    {
+        List<? extends Class> n = Arrays.asList(Integer.class, Long.class, Double.class, Float.class, Short.class, Byte.class);
+
+        for (Class nc  : n)
+        {
+            assert nc.isAssignableFrom(MathUtils.getAppropriateValueType(7, nc).getClass());
         }
-        assert ex;
+
+        assert MathUtils.getAppropriateValueType(null, null) == null;
+        assert MathUtils.getAppropriateValueType(1, null) == null;
+        assert MathUtils.getAppropriateValueType(1, String.class) == null;
+        assert MathUtils.getAppropriateValueType(null, Short.class) == null;
+    }
+
+    @Test
+    public void testInterval()
+    {
+        assert  MathUtils.checkRange(1, 1, 3);
+        assert  MathUtils.checkRange(2, 1, 3);
+        assert  MathUtils.checkRange(3, 1, 3);
+        assert !MathUtils.checkRange(0, 1, 3);
+        assert !MathUtils.checkRange(4, 1, 3);
+
+        assert !MathUtils.checkStrictRange(0, 1, 3);
+        assert  MathUtils.checkStrictRange(2, 1, 3);
+        assert !MathUtils.checkStrictRange(1, 1, 3);
+        assert !MathUtils.checkStrictRange(3, 1, 3);
+        assert !MathUtils.checkStrictRange(4, 1, 3);
+
+        int failures = 0;
+        try { MathUtils.checkRange(0, 2, 1); } catch (Exception e) { failures++; }
+        try { MathUtils.checkStrictRange(0, 2, 1); } catch (Exception e) { failures++; }
+        assert failures == 2;
+
     }
 
 }
