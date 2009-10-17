@@ -19,6 +19,18 @@ public class MathUtils
         return (int) (Math.random() * (max - min) + min);
     }
 
+    public static long randBetween(long min, long max)
+    {
+        if (max < min) throw new IllegalArgumentException("'max' < 'min' is not legal");
+        return (long) (Math.random()*(max - min) + min);
+    }
+
+    public static float randBetween(float min, float max)
+    {
+        if (max < min) throw new IllegalArgumentException("'max' < 'min' is not legal");
+        return (float) (Math.random()*(max - min) + min);
+    }
+
     /**
      * @param number a (potentially null) number
      * @return <code>0</code> if <code>number</code> is <code>null</code>,
@@ -28,5 +40,48 @@ public class MathUtils
     public static <T extends Number> T ifNullZero(T number)
     {
         return (T) ((number == null) ? 0 : number);
+    }
+
+    public static boolean checkStrictRange(int value, int min, int max)
+    {
+        if (min > max) throw new IllegalArgumentException("'min' must be smaller than 'max'");
+        return value > min && value < max;
+    }
+
+    public static boolean checkRange(int value, int min, int max)
+    {
+        if (min > max) throw new IllegalArgumentException("'min' must be smaller than 'max'");
+        return value >= min && value <= max;
+    }
+
+    public static Number getAppropriateValueType(Number value, Class requestedValueType)
+    {
+        if (value == null || requestedValueType == null) return null;
+
+        if (requestedValueType.equals(Integer.class) || requestedValueType.equals(Integer.TYPE))
+        {
+            return value.intValue();
+        }
+        else if (requestedValueType.equals(Long.class) || requestedValueType.equals(Long.TYPE))
+        {
+            return value.longValue();
+        }
+        else if (requestedValueType.equals(Double.class) || requestedValueType.equals(Double.TYPE))
+        {
+            return value.doubleValue();
+        }
+        else if (requestedValueType.equals(Float.class) || requestedValueType.equals(Float.TYPE))
+        {
+            return value.floatValue();
+        }
+        else if (requestedValueType.equals(Short.class) || requestedValueType.equals(Short.TYPE))
+        {
+            return value.shortValue();
+        }
+        else if (requestedValueType.equals(Byte.class) || requestedValueType.equals(Byte.TYPE))
+        {
+            return value.byteValue();
+        }
+        return null;
     }
 }
