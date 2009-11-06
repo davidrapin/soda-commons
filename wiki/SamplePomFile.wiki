@@ -1,0 +1,36 @@
+#labels Phase-Deploy,Featured
+=Sample `pom.xml` file that depends on `soda-commons`=
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>MY_PROJECT_GROUP</groupId>
+    <artifactId>MY_PROJECT_ID</artifactId>
+    <version>1</version>
+    <packaging>jar</packaging>
+
+    <name>MY_PROJECT_NAME</name>
+    <description>MY_PROJECT_DESCRIPTION</description>
+
+    <repositories>
+        <repository>
+            <id>soda-commons.maven.repo</id>
+            <name>soda-commons snapshot repository</name>
+            <url>http://soda-commons.googlecode.com/svn/repository/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.soda</groupId>
+            <artifactId>soda-commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>
+
+}}}
