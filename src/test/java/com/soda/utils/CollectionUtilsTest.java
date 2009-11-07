@@ -21,6 +21,16 @@ public class CollectionUtilsTest extends BaseTest
     }
 
     @Test
+    public void hasNullTest()
+    {
+        assert !CollectionUtils.hasNull(null);
+        assert CollectionUtils.hasNull(null, null);
+        assert !CollectionUtils.hasNull(1, 2, 3);
+        assert CollectionUtils.hasNull(1, "bla", 2, "true", 3, null);
+        assert CollectionUtils.hasNull(null, 1, "bla", 2, "true", 3);
+    }
+
+    @Test
     public void grep()
     {
         List<Integer> values = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);

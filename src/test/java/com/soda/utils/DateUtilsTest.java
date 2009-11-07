@@ -137,8 +137,12 @@ public class DateUtilsTest extends BaseTest
         assert DateUtils.formatDate(d2).equals("01/01/2009");
 
         d1 = DateUtils.parseDate("28/02/2003");
-        d2 = DateUtils.newDateFrom(d1, Calendar.DAY_OF_YEAR, 1);
+        d2 = DateUtils.newDateAtDays(d1, 1);
         assert DateUtils.formatDate(d2).equals("01/03/2003");
+
+        d1 = DateUtils.parseDate("28/02/2003");
+        d2 = DateUtils.newDateFrom(d1, Calendar.YEAR, 1);
+        assert DateUtils.formatDate(d2).equals("28/02/2004");
     }
 
     @Test

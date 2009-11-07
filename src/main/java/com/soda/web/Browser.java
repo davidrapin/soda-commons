@@ -43,7 +43,7 @@ public class Browser
         FIREFOX(
             "Firefox",
             "Firefox[/(]",
-            "(:? Camino/| Safari/| Opera )",
+            "(?: Camino/| Safari/| Opera )",
             " Firefox[/(](\\d+)"
         ),
         IE(
@@ -135,7 +135,7 @@ public class Browser
                 if (m.find() && m.groupCount() == 1)
                 {
                     return Integer.valueOf(m.group(1));
-                    // could not convert the matching string to integer (will not happen is regex are good)
+                    // could not convert the matching string to integer (will not happen if regex are good)
                 }
             }
 
