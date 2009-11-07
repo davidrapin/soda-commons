@@ -10,6 +10,21 @@ public class CollectionUtils
 
     protected CollectionUtils() {}
 
+    /**
+     *
+     * @param objects a list of elements
+     * @return true if the given list contains a null value. false if the list is null or if it contains no null element
+     */
+    public static boolean hasNull(Object... objects)
+    {
+        if (objects == null) return false;
+        for (Object o : objects)
+        {
+            if (o == null) return true;
+        }
+        return false;
+    }
+
     public static <T> List<T> grep(final List<T> list, final Condition<T> condition)
     {
         ArrayList<T> newList = new ArrayList<T>();
@@ -47,16 +62,16 @@ public class CollectionUtils
     }
 
     /**
-     * @param list a list from wich we would like to create a map
+     * @param list      a list from wich we would like to create a map
      * @param keyReader an attribute reader that will return the object to use as a key for the map for each element
      * @return a map of objects of type <code>V<code> indexed by the objects returned by the <code>keyReader</code>
      */
     public static <K, V> Map<K, V> asMap(List<V> list, AttributeReader<V, K> keyReader)
     {
         if (list == null) return null;
-        if(keyReader == null) throw new IllegalArgumentException("'keyReader' should not be null");
+        if (keyReader == null) throw new IllegalArgumentException("'keyReader' should not be null");
 
-        Map<K, V> map = new HashMap<K,V>(list.size());
+        Map<K, V> map = new HashMap<K, V>(list.size());
         for (V item : list)
         {
             map.put(keyReader.getAttribute(item), item);
@@ -94,15 +109,15 @@ public class CollectionUtils
 
     /**
      * applies an operation to all items in a list, result the list of results
-     * 
-     * @param sources the list of source objects to convert
+     *
+     * @param sources   the list of source objects to convert
      * @param operation an opteration that takes a source object as an argument and return a result object
      * @return the list of all converted object
      */
     public static <S, T> List<T> map(final List<S> sources, Operation<S, T> operation)
     {
         if (sources == null) return null;
-        if(operation == null) throw new IllegalArgumentException("'operation' should not be null");
+        if (operation == null) throw new IllegalArgumentException("'operation' should not be null");
 
         List<T> results = new ArrayList<T>();
 

@@ -162,6 +162,11 @@ public class DateUtils
         return c.getActualMaximum(Calendar.DAY_OF_YEAR);
     }
 
+    public static Date newDateAtDays(Date reference, int distance)
+    {
+        return newDateFrom(reference, Calendar.DAY_OF_YEAR, distance);
+    }
+
     public static Date newDateFrom(Date reference, int field, int distance)
     {
         Calendar c = Calendar.getInstance();

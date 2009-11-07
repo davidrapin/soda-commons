@@ -89,7 +89,7 @@ class CountriesParser
             }
             catch (IllegalAccessException e)
             {
-                log.error("Could not call country name setter (probably the method is not public)", e);
+                log.error("Could not call country name setter (probably because the method is not public)", e);
             }
         }
     }
