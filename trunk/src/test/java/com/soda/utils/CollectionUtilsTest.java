@@ -20,6 +20,7 @@ public class CollectionUtilsTest extends BaseTest
         new CollectionUtils();
     }
 
+    @SuppressWarnings({"NullArgumentToVariableArgMethod"})
     @Test
     public void hasNullTest()
     {
