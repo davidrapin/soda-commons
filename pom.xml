@@ -106,7 +106,17 @@
         <!-- see http://docs.codehaus.org/display/MAVENUSER/POM+Element+for+Source+File+Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <!-- configure code coverage tool -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+
     <build>
         <plugins>
             <!-- compile -->
@@ -128,6 +138,21 @@
                         <id>attach-sources</id>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- compute test coverage -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>test-coverage</id>
+                        <goals>
+                            <goal>clean</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
