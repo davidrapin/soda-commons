@@ -1,6 +1,7 @@
 package com.soda.utils;
 
 import java.text.Normalizer;
+import java.util.List;
 
 /**
  * @author david rapin
@@ -129,11 +130,63 @@ public class StringUtils
 
     /**
      * @param s the string to modify
-     * @return <code>s</code> with the first eltter capitalized
+     * @return <code>s</code> with the first letter capitalized
      */
     public static String capitalizeFirstLetter(String s)
     {
         if (s == null || s.isEmpty()) return s;
         return s.length() == 1 ? s.toUpperCase() : s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
+
+    /**
+     * @param strings an array of strings
+     * @return all strings in the given array concatenated.
+     *         null if the array is null or empty.
+     */
+    public static String join(String[] strings)
+    {
+        return join(strings, null);
+    }
+
+    /**
+     * @param strings an array of strings
+     * @param joinString a string (null or empty for nothing)
+     * @return all strings in the given array concatenated, with <code>joinString</code> between each.
+     *         null if the array is null or empty.
+     */
+    public static String join(String[] strings, String joinString)
+    {
+        if (strings == null || strings.length == 0) return null;
+        StringBuffer b = new StringBuffer();
+        for (String str : strings)
+        {
+            if (str != null)
+            {
+                b.append(str);
+                if (joinString != null) b.append(joinString);
+            }
+        }
+        return b.toString();
+    }
+
+    /**
+     * @param strings a list of strings
+     * @param joinString a string (null or empty for nothing)
+     * @return all strings in the given array concatenated, with <code>joinString</code> between each.
+     *         null if the array is null or empty.
+     */
+    public static String join(List<String> strings, String joinString)
+    {
+        if (strings == null || strings.size() == 0) return null;
+        StringBuffer b = new StringBuffer();
+        for (String str : strings)
+        {
+            if (str != null)
+            {
+                b.append(str);
+                if (joinString != null) b.append(joinString);
+            }
+        }
+        return b.toString();
     }
 }

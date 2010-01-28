@@ -1,7 +1,11 @@
 package com.soda.utils;
 
-import org.testng.annotations.Test;
 import com.soda.BaseTest;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author david rapin
@@ -129,5 +133,38 @@ public class StringUtilsTest extends BaseTest
         assert StringUtils.chop("zzz", 'z').equals("zz");
         assert StringUtils.chop("", 'z').equals("");
 
+    }
+
+    @Test
+    public void join()
+    {
+        assert StringUtils.join(null) == null;
+        assert StringUtils.join((String[]) null, null) == null;
+        assert StringUtils.join((String[]) null, "lulz") == null;
+        assert StringUtils.join(new String[]{}, "lulz") == null;
+        assert StringUtils.join(new String[]{""}, "lulz").equals("lulz");
+        assert StringUtils.join(new String[]{"333"}, "lulz").equals("333lulz");
+        assert StringUtils.join(new String[]{"333", "444"}, "lulz").equals("333lulz444lulz");
+        assert StringUtils.join(new String[]{"333", "444"}, null).equals("333444");
+        assert StringUtils.join(new String[]{"333", "444"}, "").equals("333444");
+        assert StringUtils.join(new String[]{"333", "444"}).equals("333444");
+        assert StringUtils.join(new String[]{"333", null, "555"}).equals("333555");
+        assert StringUtils.join(new String[]{"333", null, "555"}, "j").equals("333j555j");
+    }
+
+    @Test
+    public void joinList()
+    {
+        assert StringUtils.join((List<String>) null, null) == null;
+        assert StringUtils.join((List<String>) null, "lulz") == null;
+        assert StringUtils.join(new ArrayList<String>(), "lulz") == null;
+        assert StringUtils.join(Arrays.asList(""), "lulz").equals("lulz");
+        assert StringUtils.join(Arrays.asList("333"), "lulz").equals("333lulz");
+        assert StringUtils.join(Arrays.asList("333", "444"), "lulz").equals("333lulz444lulz");
+        assert StringUtils.join(Arrays.asList("333", "444"), null).equals("333444");
+        assert StringUtils.join(Arrays.asList("333", "444"), "").equals("333444");
+        //assert StringUtils.join(Arrays.asList("333", "444")).equals("333444");
+        //assert StringUtils.join(Arrays.asList("333", null, "555")).equals("333555");
+        assert StringUtils.join(Arrays.asList("333", null, "555"), "j").equals("333j555j");
     }
 }

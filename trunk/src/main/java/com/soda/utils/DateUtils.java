@@ -261,4 +261,25 @@ public class DateUtils
         }
     }
 
+    public static Date getSmallestDateOfBirthForAge(int ageInYears)
+    {
+        return getSmallestDateOfBirthForAgeAt(ageInYears, new Date());
+    }
+
+    protected static Date getSmallestDateOfBirthForAgeAt(int ageInYears, Date dateOfComputation)
+    {
+        if (ageInYears < 0) throw new IllegalArgumentException("'ageInYears' cannot be smaller than zero");
+        return getMidnight(new DateTime(dateOfComputation).minusYears(ageInYears + 1).plusDays(1).toDate());
+    }
+
+    public static Date getHighestDateOfBirthForAge(int ageInYears)
+    {
+        return getHighestDateOfBirthForAgeAt(ageInYears, new Date());
+    }
+
+    protected static Date getHighestDateOfBirthForAgeAt(int ageInYears, Date dateOfComputation)
+    {
+        if (ageInYears < 0) throw new IllegalArgumentException("'ageInYears' cannot be smaller than zero");
+        return getMidnight(new DateTime(dateOfComputation).minusYears(ageInYears).toDate());
+    }
 }
