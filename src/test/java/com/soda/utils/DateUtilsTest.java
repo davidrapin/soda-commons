@@ -179,4 +179,18 @@ public class DateUtilsTest extends BaseTest
             assert days.get(i).equals(check);
         }
     }
+
+    @Test
+    public void ageAtDate()
+    {
+        // celui qui est né le 28/01/1984 aura 26 ans le 28/01/2010. le 27/01/2010 il a encore 25 ans
+        assert DateUtils.getSmallestDateOfBirthForAgeAt(25, DateUtils.getDate(2010, 1, 27)).equals(DateUtils.getDate(1984, 1, 28));
+        // celui qui est né le 27/01/1985 a 25 ans le 27/01/2010
+        assert DateUtils.getHighestDateOfBirthForAgeAt(25, DateUtils.getDate(2010, 1, 27)).equals(DateUtils.getDate(1985, 1, 27));
+
+        // celui qui est né le 01/08/2004 aura 11 ans le 01/08/2015. le 31/07/2015 il a encore 10 ans
+        assert DateUtils.getSmallestDateOfBirthForAgeAt(10, DateUtils.getDate(2015, 7, 31)).equals(DateUtils.getDate(2004, 8, 1));
+        // celui qui est né le 31/07/2005 a 10 ans le 31/07/2015
+        assert DateUtils.getHighestDateOfBirthForAgeAt(10, DateUtils.getDate(2015, 7, 31)).equals(DateUtils.getDate(2005, 7, 31));
+    }
 }
