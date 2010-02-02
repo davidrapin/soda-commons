@@ -131,4 +131,27 @@ public class CollectionUtils
         RESULT applyTo(SOURCE s);
     }
 
+
+    /**
+     * @param sa a set
+     * @param sb anotehr set
+     * @return the intersection of <code>sa</code> and <code>sb</code>
+     */
+    public static <E> Set<E> intersection(Set<E> sa, Set<E> sb)
+    {
+
+        Set<E> result = new HashSet<E>();
+        if (sa == null || sb == null || sa.isEmpty() ||sb.isEmpty()) return result;
+
+        Set<E> smallest = sa.size() < sb.size() ? sa : sb;
+        Set<E> biggest = smallest == sa ? sb : sa;
+
+        for (E entry : smallest)
+        {
+            if (biggest.contains(entry)) result.add(entry);
+        }
+
+        return result;
+    }
+
 }
