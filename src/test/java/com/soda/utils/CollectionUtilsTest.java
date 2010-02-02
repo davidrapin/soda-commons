@@ -3,10 +3,7 @@ package com.soda.utils;
 import com.soda.BaseTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author david rapin
@@ -143,5 +140,50 @@ public class CollectionUtilsTest extends BaseTest
         assert map.get("k4").equals(4);
         assert map.get("k5").equals(5);
         assert map.get("k6").equals(6);
+    }
+
+    @Test
+    public void testIntersection()
+    {
+        Set<Integer> sa = new HashSet<Integer>();
+        Set<Integer> sb = new HashSet<Integer>();
+
+        assert CollectionUtils.intersection(sa, sb).isEmpty();
+        assert CollectionUtils.intersection(sa, null).isEmpty();
+        assert CollectionUtils.intersection(null, sa).isEmpty();
+        assert CollectionUtils.intersection(null, null).isEmpty();
+
+        sa.add(1);
+        sa.add(9);
+        sa.add(7);
+        sa.add(14);
+        sa.add(6);
+        sa.add(1492);
+        sa.add(-800);
+        sa.add(3);
+        sa.add(256);
+
+        sb.add(1492);  // <-
+        sb.add(2);
+        sb.add(27);
+        sb.add(45);
+        sb.add(5);
+        sb.add(1); // <-
+        sb.add(1);
+        sb.add(14);  // <-
+        sb.add(6);  // <-
+
+        assert CollectionUtils.intersection(sa, sa).equals(sa);
+        assert CollectionUtils.intersection(sb, sb).equals(sb);
+
+        Set<Integer> inter = CollectionUtils.intersection(sa, sb);
+        Set<Integer> inter2 = CollectionUtils.intersection(sb, sa);
+        assert inter.equals(inter2);
+
+        assert inter.size() == 4;
+        assert inter.contains(1);
+        assert inter.contains(1492);
+        assert inter.contains(14);
+        assert inter.contains(6);
     }
 }
