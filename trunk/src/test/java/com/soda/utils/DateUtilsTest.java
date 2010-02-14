@@ -86,7 +86,7 @@ public class DateUtilsTest extends BaseTest
         assert DateUtils.sameYear(new Date(), DateUtils.getBeginningOfYear());
     }
 
-    @Test()
+    @Test
     public void dateDiff()
     {
         // set a date 'D'
@@ -111,7 +111,45 @@ public class DateUtilsTest extends BaseTest
         assert (diff_w == 10F/7F);
     }
 
-    @Test()
+    @Test
+    public void dateDiffIgnoreTime()
+    {
+        Date d1_a = DateUtils.getDate(2009, 12, 31, 8, 0, 0);
+        Date d1_b = DateUtils.getDate(2009, 12, 31, 14, 0, 0);
+
+        Date d2_a = DateUtils.getDate(2010, 1, 1, 8, 0, 0);
+        Date d2_b = DateUtils.getDate(2010, 1, 1, 14, 0, 0);
+
+        // todo: write up some tests cases
+        //assert DateUtils.dateDiffInDays()
+    }
+
+    @Test
+    public void mostRecentTest()
+    {
+        Date d1 = DateUtils.getDate(2010, 1, 31);
+        Date d2 = DateUtils.getDate(2010, 1, 31);
+        assert DateUtils.getMostRecent(d1, d2).equals(d1);
+
+        d1 = DateUtils.getDate(2010, 1, 31);
+        d2 = null;
+        assert DateUtils.getMostRecent(d1, d2).equals(d1);
+        assert DateUtils.getMostRecent(d2, d1).equals(d1);
+
+        d1 = null;
+        d2 = null;
+        assert DateUtils.getMostRecent(d1, d2) == null;
+
+        d1 = DateUtils.getDate(2010, 1, 31);
+        d2 = DateUtils.getDate(2010, 1, 30);
+        assert DateUtils.getMostRecent(d1, d2).equals(d1);
+
+        d1 = DateUtils.getDate(2009, 1, 31);
+        d2 = DateUtils.getDate(2010, 1, 31);
+        assert DateUtils.getMostRecent(d1, d2).equals(d2);
+    }
+
+    @Test
     public void weeksInYear()
     {
         assert DateUtils.weeksInYear(2003) == 52;
@@ -120,7 +158,7 @@ public class DateUtilsTest extends BaseTest
         assert DateUtils.weeksInYear(2009) == 53;
     }
 
-    @Test()
+    @Test
     public void daysInYear()
     {
         assert DateUtils.daysInYear(2003) == 365;
