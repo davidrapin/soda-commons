@@ -112,14 +112,28 @@ public class DateUtils
 
     /**
      * @param year  a year
-     * @param month a month
-     * @param day   a day in <code>month</code>
+     * @param month a month (between 1 eand 12)
+     * @param day   a day in <code>month</code> (between 1 and 31)
      * @return a new date for the given day/month/year
      */
     public static Date getDate(int year, int month, int day)
     {
+        return getDate(year, month, day, 0, 0, 0);
+    }
+
+    /**
+     * @param year  a year
+     * @param month a month (between 1 eand 12)
+     * @param day   a day in <code>month</code> (between 1 and 31)
+     * @param hour an hour (between 0 and 23)
+     * @param minute a minute (between 0 and 60)
+     * @param second a secode (between 0 and 60)
+     * @return a new date for the given day/month/year hour:minute:second
+     */
+    public static Date getDate(int year, int month, int day, int hour, int minute, int second)
+    {
         Calendar c = Calendar.getInstance();
-        c.set(year, month - 1, day, 0, 0, 0);
+        c.set(year, month - 1, day, hour, minute, second);
         c.set(Calendar.MILLISECOND, 0);
         return c.getTime();
     }
@@ -230,6 +244,11 @@ public class DateUtils
         return ((float) (dateEnd.getTime() - dateStart.getTime()))/ONE_DAY_IN_MILLIS;
     }
 
+    public static float dateDiffInDaysIgnoreTime(Date dateStart, Date dateEnd)        
+    {
+        return dateDiffInDays(getMidnight(dateEnd), getMidnight(dateStart));
+    }
+
     public static float dateDiffInWeeks(Date dateStart, Date dateEnd)
     {
         return ((float) (dateEnd.getTime() - dateStart.getTime()))/ONE_WEEK_IN_MILLIS;
@@ -237,7 +256,7 @@ public class DateUtils
 
     /**
      * @param date the string representation fo a date, formatted according to DateUtils.DATE_FORMAT
-     * @return the converted date obect, or null in case of failure
+     * @return the converted date object, or null in case of failure
      */
     public static Date parseDate(String date)
     {
@@ -266,7 +285,7 @@ public class DateUtils
         return getSmallestDateOfBirthForAgeAt(ageInYears, new Date());
     }
 
-    protected static Date getSmallestDateOfBirthForAgeAt(int ageInYears, Date dateOfComputation)
+    public static Date getSmallestDateOfBirthForAgeAt(int ageInYears, Date dateOfComputation)
     {
         if (ageInYears < 0) throw new IllegalArgumentException("'ageInYears' cannot be smaller than zero");
         return getMidnight(new DateTime(dateOfComputation).minusYears(ageInYears + 1).plusDays(1).toDate());
@@ -277,9 +296,16 @@ public class DateUtils
         return getHighestDateOfBirthForAgeAt(ageInYears, new Date());
     }
 
-    protected static Date getHighestDateOfBirthForAgeAt(int ageInYears, Date dateOfComputation)
+    public static Date getHighestDateOfBirthForAgeAt(int ageInYears, Date dateOfComputation)
     {
         if (ageInYears < 0) throw new IllegalArgumentException("'ageInYears' cannot be smaller than zero");
         return getMidnight(new DateTime(dateOfComputation).minusYears(ageInYears).toDate());
+    }
+
+    public static Date getMostRecent(Date d1, Date d2)
+    {
+        if (d1 == null) return d2;
+        if (d2 == null) return d1;
+        return (d1.before(d2)) ? d2 : d1;
     }
 }
