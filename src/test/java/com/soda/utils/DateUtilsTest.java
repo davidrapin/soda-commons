@@ -117,11 +117,34 @@ public class DateUtilsTest extends BaseTest
         Date d1_a = DateUtils.getDate(2009, 12, 31, 8, 0, 0);
         Date d1_b = DateUtils.getDate(2009, 12, 31, 14, 0, 0);
 
-        Date d2_a = DateUtils.getDate(2010, 1, 1, 8, 0, 0);
-        Date d2_b = DateUtils.getDate(2010, 1, 1, 14, 0, 0);
+        Date d2_a = DateUtils.getDate(2010, 1, 1, 7, 0, 0);
+        Date d2_b = DateUtils.getDate(2010, 1, 1, 15, 0, 0);
 
-        // todo: write up some tests cases
-        //assert DateUtils.dateDiffInDays()
+        Date d3 = DateUtils.getDate(2010, 1, 1, 15, 30, 20);
+        Date d4 = DateUtils.getDate(2010, 2, 1, 19, 20, 10);
+
+        assert DateUtils.dateDiffInDaysIgnoreTime(d1_a, d1_a) == 0;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d1_b, d1_b) == 0;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d2_a, d2_a) == 0;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d2_b, d2_b) == 0;
+
+        assert DateUtils.dateDiffInDaysIgnoreTime(d1_a, d1_b) == 0;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d2_a, d2_b) == 0;
+
+        assert DateUtils.dateDiffInDaysIgnoreTime(d1_a, d2_a) == 1;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d2_a, d1_a) == -1;
+
+        assert DateUtils.dateDiffInDaysIgnoreTime(d1_a, d2_b) == 1;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d2_a, d1_b) == -1;
+
+        assert DateUtils.dateDiffInDaysIgnoreTime(d1_b, d2_a) == 1;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d2_b, d1_a) == -1;
+
+        assert DateUtils.dateDiffInDaysIgnoreTime(d1_b, d2_b) == 1;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d2_b, d1_b) == -1;
+
+        assert DateUtils.dateDiffInDaysIgnoreTime(d3, d4) == 31;
+        assert DateUtils.dateDiffInDaysIgnoreTime(d4, d3) == -31; 
     }
 
     @Test
