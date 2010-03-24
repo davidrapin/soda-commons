@@ -246,7 +246,7 @@ public class DateUtils
 
     public static float dateDiffInDaysIgnoreTime(Date dateStart, Date dateEnd)        
     {
-        return dateDiffInDays(getMidnight(dateEnd), getMidnight(dateStart));
+        return dateDiffInDays(getMidnight(dateStart), getMidnight(dateEnd));
     }
 
     public static float dateDiffInWeeks(Date dateStart, Date dateEnd)
