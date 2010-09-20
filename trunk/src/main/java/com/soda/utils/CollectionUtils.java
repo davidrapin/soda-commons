@@ -25,7 +25,7 @@ public class CollectionUtils
         return false;
     }
 
-    public static <T> List<T> grep(final List<T> list, final Condition<T> condition)
+    public static <T> ArrayList<T> grep(final List<T> list, final Condition<T> condition)
     {
         ArrayList<T> newList = new ArrayList<T>();
         for (T element : list)
@@ -66,7 +66,7 @@ public class CollectionUtils
      * @param keyReader an attribute reader that will return the object to use as a key for the map for each element
      * @return a map of objects of type <code>V<code> indexed by the objects returned by the <code>keyReader</code>
      */
-    public static <K, V> Map<K, V> asMap(List<V> list, AttributeReader<V, K> keyReader)
+    public static <K, V> Map<K, V> asMap(List<? extends V> list, AttributeReader<V, K> keyReader)
     {
         if (list == null) return null;
         if (keyReader == null) throw new IllegalArgumentException("'keyReader' should not be null");
