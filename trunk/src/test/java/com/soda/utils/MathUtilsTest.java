@@ -2,6 +2,7 @@ package com.soda.utils;
 
 import com.soda.BaseTest;
 import org.testng.annotations.Test;
+import static org.testng.AssertJUnit.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
@@ -96,6 +97,22 @@ public class MathUtilsTest extends BaseTest
         try { MathUtils.checkStrictRange(0, 2, 1); } catch (Exception e) { failures++; }
         assert failures == 2;
 
+    }
+
+    @Test
+    public void testNextMultipleOfN()
+    {
+        assertEquals(0, MathUtils.nextMultipleOfN(0, 12));
+        assertEquals(12, MathUtils.nextMultipleOfN(10, 12));
+        assertEquals(12, MathUtils.nextMultipleOfN(12, 12));
+        assertEquals(10, MathUtils.nextMultipleOfN(10, 5));
+        assertEquals(15, MathUtils.nextMultipleOfN(11, 5));
+        assertEquals(120, MathUtils.nextMultipleOfN(61, 60));
+
+        assertEquals(-96, MathUtils.nextMultipleOfN(-100, 12));
+        assertEquals(-48, MathUtils.nextMultipleOfN(-50, 12));
+        assertEquals(-12, MathUtils.nextMultipleOfN(-13, 12));
+        assertEquals(0, MathUtils.nextMultipleOfN(-5, 12));
     }
 
 }

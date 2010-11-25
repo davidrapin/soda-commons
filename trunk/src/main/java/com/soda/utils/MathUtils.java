@@ -84,4 +84,15 @@ public class MathUtils
         }
         return null;
     }
+
+    /**
+     * @param start the first value to consider
+     * @param n the number which we want to find a multiple of
+     * @return the next multiple of <code>start</code> that is greater than <code>n</code>.
+     */
+    public static int nextMultipleOfN(int start, int n)
+    {
+        if (start % n == 0) return start;
+        return start + n - (start % n) - (start > 0 ? 0 : n);
+    }
 }

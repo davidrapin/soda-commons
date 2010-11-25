@@ -79,6 +79,33 @@ public class CollectionUtils
         return map;
     }
 
+    /**
+     * @param list      a list from wich we would like to create a map
+     * @param keyReader an attribute reader that will return the object to use as a key for the map for each element
+     * @return a map of lists of objects of type <code>V<code>, indexed by the objects returned by the <code>keyReader</code>
+     */
+    public static <K, V> Map<K, List<V>> asListMap(List<? extends V> list, AttributeReader<V, K> keyReader)
+    {
+        if (list == null) return null;
+        if (keyReader == null) throw new IllegalArgumentException("'keyReader' should not be null");
+
+        Map<K, List<V>> map = new HashMap<K, List<V>>();
+        for (V item : list)
+        {
+            K key = keyReader.getAttribute(item);
+            List<V> klist = map.get(key);
+
+            if (klist == null)
+            {
+                klist = new ArrayList<V>();
+                map.put(key, klist);
+            }
+
+            klist.add(item);
+        }
+        return map;
+    }
+
     public static interface AttributeReader<O, V>
     {
         V getAttribute(O object);
