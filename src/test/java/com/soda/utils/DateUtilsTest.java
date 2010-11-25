@@ -1,6 +1,7 @@
 package com.soda.utils;
 
 import com.soda.BaseTest;
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
@@ -109,6 +110,14 @@ public class DateUtilsTest extends BaseTest
 
         assert (diff_d == 10F);
         assert (diff_w == 10F/7F);
+        assert DateUtils.distanceToNowInDaysIgnoreTime(new Date()) >= 0;
+        assert DateUtils.distanceToNowInDaysIgnoreTime(new Date()) < 0.00001;
+
+        DateTime dt1 = new DateTime(2010, 3, 31, 6, 15, 0, 0);
+        DateTime dt2 = new DateTime(2010, 3, 31, 22, 45, 0, 0);
+        DateTime dt3 = new DateTime(2010, 4, 1, 3, 0, 0, 0);
+        assert DateUtils.dateDiffInDaysIgnoreTime(dt1.toDate(), dt2.toDate()) == 0;
+        assert DateUtils.dateDiffInDaysIgnoreTime(dt1.toDate(), dt3.toDate()) == 1;
     }
 
     @Test

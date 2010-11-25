@@ -249,6 +249,11 @@ public class DateUtils
         return dateDiffInDays(getMidnight(dateStart), getMidnight(dateEnd));
     }
 
+    public static float distanceToNowInDaysIgnoreTime(Date date)
+    {
+        return dateDiffInDaysIgnoreTime(date, new Date());
+    }
+
     public static float dateDiffInWeeks(Date dateStart, Date dateEnd)
     {
         return ((float) (dateEnd.getTime() - dateStart.getTime()))/ONE_WEEK_IN_MILLIS;

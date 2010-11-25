@@ -137,9 +137,56 @@ public class CollectionUtilsTest extends BaseTest
         catch (Exception e) { failed = true; }
         assert failed;
 
+        assert map.size() == 3;
         assert map.get("k4").equals(4);
         assert map.get("k5").equals(5);
         assert map.get("k6").equals(6);
+    }
+
+    @Test
+    public void asMapTest2()
+    {
+        List<Integer> l = Arrays.asList(5, 9, 9, 6);
+
+        Map<String, Integer> map = CollectionUtils.asMap(l, new CollectionUtils.AttributeReader<Integer, String>()
+        {
+            public String getAttribute(Integer object)
+            {
+                return "k" + object;
+            }
+        });
+
+        assert map.size() == 3;
+        assert map.get("k5").equals(5);
+        assert map.get("k9").equals(9);
+        assert map.get("k6").equals(6);
+    }
+
+    @Test
+    public void asListMapTest()
+    {
+        List<Integer> l = Arrays.asList(5, 9, 9, 90, 6);
+
+        Map<String, List<Integer>> map = CollectionUtils.asListMap(l, new CollectionUtils.AttributeReader<Integer, String>()
+        {
+            public String getAttribute(Integer object)
+            {
+                if (object > 10) return "k" + (object / 10);
+                return "k" + object;
+            }
+        });
+
+        assert map.size() == 3;
+
+        assert map.get("k5").size() == 1;
+        assert map.get("k5").contains(5);
+
+        assert map.get("k9").size() == 3;
+        assert map.get("k9").contains(9);
+        assert map.get("k9").contains(90);
+
+        assert map.get("k6").size() == 1;
+        assert map.get("k6").contains(6);
     }
 
     @Test
