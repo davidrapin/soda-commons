@@ -110,6 +110,17 @@ public class StringUtils
     }
 
     /**
+     *
+     * @param xml a string potentially containing XML tags
+     * @return the given string with all XML tags removed
+     */
+    public static String stripXML(String xml)
+    {
+        if (xml == null || xml.isEmpty()) return xml;
+        return xml.replaceAll("<[Bb][Rr][\\s]*[/]?>", "\r\n").replaceAll("<[^>]*>", "");
+    }
+
+    /**
      * @param str the string we are removing the last char from
      * @return <code>str</code> with the last char removed. if <code>str</code> is <code>null</code> or empty, chop(String) has no effect.
      */
