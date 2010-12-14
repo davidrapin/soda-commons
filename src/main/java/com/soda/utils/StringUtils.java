@@ -117,7 +117,13 @@ public class StringUtils
     public static String stripXML(String xml)
     {
         if (xml == null || xml.isEmpty()) return xml;
-        return xml.replaceAll("(?:<[Bb][Rr][\\s]*[/]?>)+", "\r\n").replaceAll("<[^>]*>", "");
+        return xml
+            // remove original CR-LF's
+            .replaceAll("[\r\n]+", "")
+            // convert HTML line-breaks into CR-LF's (ignoring consecutive)
+            .replaceAll("(?:<[Bb][Rr][\\s]*[/]?>)+", "\r\n")
+            // remove remaining HTML tags
+            .replaceAll("<[^>]*>", "");
     }
 
     /**

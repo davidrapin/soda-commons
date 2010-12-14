@@ -175,7 +175,7 @@ public class StringUtilsTest extends BaseTest
         assertEquals(StringUtils.stripXML(null), null);
         assertEquals(StringUtils.stripXML(""), "");
 
-        String xml = "<blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa z'_èé_(é\"( _é\"&é\"ç'_ >";
+        String xml = "<blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa z'_èé_(é\"( _é\"&é\"ç'_ >\r\r\r\n";
         String stripped = "";
         assertEquals(StringUtils.stripXML(xml), stripped);
 
