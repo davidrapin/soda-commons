@@ -2,6 +2,7 @@ package com.soda.utils;
 
 import com.soda.BaseTest;
 import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -166,5 +167,24 @@ public class StringUtilsTest extends BaseTest
         //assert StringUtils.join(Arrays.asList("333", "444")).equals("333444");
         //assert StringUtils.join(Arrays.asList("333", null, "555")).equals("333555");
         assert StringUtils.join(Arrays.asList("333", null, "555"), "j").equals("333j555j");
+    }
+
+    @Test
+    public void stripXmlText()
+    {
+        assertEquals(StringUtils.stripXML(null), null);
+        assertEquals(StringUtils.stripXML(""), "");
+
+        String xml = "<blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa z'_èé_(é\"( _é\"&é\"ç'_ >";
+        String stripped = "";
+        assertEquals(StringUtils.stripXML(xml), stripped);
+
+        xml = "<a style=\"lulz:3px\" target=\"rofl\">  fünky <br/>:)</a>";
+        stripped = "  fünky \r\n:)";
+        assertEquals(StringUtils.stripXML(xml), stripped);
+
+        xml = "a<br/>b<br />c<br>d<br >e<BR>f<BR >g<BR/>h<BR />i<bR   />j";
+        stripped = "a\r\nb\r\nc\r\nd\r\ne\r\nf\r\ng\r\nh\r\ni\r\nj";
+        assertEquals(StringUtils.stripXML(xml), stripped);
     }
 }
