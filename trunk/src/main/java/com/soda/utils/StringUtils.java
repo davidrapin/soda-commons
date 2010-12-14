@@ -112,12 +112,12 @@ public class StringUtils
     /**
      *
      * @param xml a string potentially containing XML tags
-     * @return the given string with all XML tags removed
+     * @return the given string with all XML tags removed. consecutive line-breaks are ignored
      */
     public static String stripXML(String xml)
     {
         if (xml == null || xml.isEmpty()) return xml;
-        return xml.replaceAll("<[Bb][Rr][\\s]*[/]?>", "\r\n").replaceAll("<[^>]*>", "");
+        return xml.replaceAll("(?:<[Bb][Rr][\\s]*[/]?>)+", "\r\n").replaceAll("<[^>]*>", "");
     }
 
     /**
