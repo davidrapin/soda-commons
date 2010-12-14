@@ -186,5 +186,13 @@ public class StringUtilsTest extends BaseTest
         xml = "a<br/>b<br />c<br>d<br >e<BR>f<BR >g<BR/>h<BR />i<bR   />j";
         stripped = "a\r\nb\r\nc\r\nd\r\ne\r\nf\r\ng\r\nh\r\ni\r\nj";
         assertEquals(StringUtils.stripXML(xml), stripped);
+
+        xml = "<br /><br />";
+        stripped = "\r\n";
+        assertEquals(StringUtils.stripXML(xml), stripped);
+
+        xml = "<br />";
+        stripped = "\r\n";
+        assertEquals(StringUtils.stripXML(xml), stripped);
     }
 }
