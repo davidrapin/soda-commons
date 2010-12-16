@@ -2,6 +2,7 @@ package com.soda.utils;
 
 import com.soda.BaseTest;
 import org.joda.time.DateTime;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
@@ -15,12 +16,14 @@ public class DateUtilsTest extends BaseTest
 {
 
     @Test
-    public void coverageFix() {
+    public void coverageFix()
+    {
         new DateUtils();
     }
 
     @Test
-    public void getMidnight() {
+    public void getMidnight()
+    {
         Calendar c = Calendar.getInstance();
         // month index in one more than natural month number
         c.set(2008, 9, 21, 14, 30, 10);
@@ -32,16 +35,20 @@ public class DateUtilsTest extends BaseTest
 
         // ex
         boolean ex = false;
-        try {
+        try
+        {
             DateUtils.getMidnight(null);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             ex = true;
         }
         assert ex;
     }
 
     @Test
-    public void sameYear() {
+    public void sameYear()
+    {
         assert DateUtils.sameYear(DateUtils.getDate(2009, 1, 1), DateUtils.getDate(2009, 12, 31));
         assert DateUtils.sameYear(DateUtils.getDate(2008, 12, 31), DateUtils.getDate(2008, 1, 1));
         assert !DateUtils.sameYear(DateUtils.getDate(2008, 12, 31), DateUtils.getDate(2009, 1, 1));
@@ -50,12 +57,13 @@ public class DateUtilsTest extends BaseTest
         int ex = 0;
         try { DateUtils.sameYear(new Date(), null); } catch (Exception e) { ex++; }
         try { DateUtils.sameYear(null, new Date()); } catch (Exception e) { ex++; }
-        try { DateUtils.sameYear(null, null);       } catch (Exception e) { ex++; }
+        try { DateUtils.sameYear(null, null); } catch (Exception e) { ex++; }
         assert ex == 3;
     }
 
     @Test
-    public void sameDay() {
+    public void sameDay()
+    {
         assert DateUtils.sameDay(DateUtils.getDate(2009, 1, 1), DateUtils.getDate(2009, 1, 1));
         assert DateUtils.sameDay(DateUtils.getDate(2010, 12, 12), DateUtils.getDate(2010, 12, 12));
         assert !DateUtils.sameDay(DateUtils.getDate(2010, 12, 12), DateUtils.getDate(2010, 12, 13));
@@ -67,12 +75,13 @@ public class DateUtilsTest extends BaseTest
         int ex = 0;
         try { DateUtils.sameDay(new Date(), null); } catch (Exception e) { ex++; }
         try { DateUtils.sameDay(null, new Date()); } catch (Exception e) { ex++; }
-        try { DateUtils.sameDay(null, null);       } catch (Exception e) { ex++; }
+        try { DateUtils.sameDay(null, null); } catch (Exception e) { ex++; }
         assert ex == 3;
     }
 
     @Test
-    public void beginningOfYear() {
+    public void beginningOfYear()
+    {
         Calendar c = Calendar.getInstance();
         c.set(2008, 9, 21, 14, 30, 10);
         Date d = c.getTime();
@@ -83,7 +92,8 @@ public class DateUtilsTest extends BaseTest
     }
 
     @Test
-    public void beginningOfCurrentYear() {
+    public void beginningOfCurrentYear()
+    {
         assert DateUtils.sameYear(new Date(), DateUtils.getBeginningOfYear());
     }
 
@@ -102,14 +112,14 @@ public class DateUtilsTest extends BaseTest
         Date d2 = c1.getTime();
 
         // diff in days
-        float diff_d = DateUtils.dateDiffInDays(d1,d2);
+        float diff_d = DateUtils.dateDiffInDays(d1, d2);
         // diff in weeks
-        float diff_w = DateUtils.dateDiffInWeeks(d1,d2);
+        float diff_w = DateUtils.dateDiffInWeeks(d1, d2);
 
-        System.out.println("date1:" + d1 + " - date2:" + d2 + " - diff in days:" + diff_d + " - diff in weeks:" + diff_w );
+        System.out.println("date1:" + d1 + " - date2:" + d2 + " - diff in days:" + diff_d + " - diff in weeks:" + diff_w);
 
         assert (diff_d == 10F);
-        assert (diff_w == 10F/7F);
+        assert (diff_w == 10F / 7F);
         assert DateUtils.distanceToNowInDaysIgnoreTime(new Date()) >= 0;
         assert DateUtils.distanceToNowInDaysIgnoreTime(new Date()) < 0.00001;
 
@@ -153,7 +163,7 @@ public class DateUtilsTest extends BaseTest
         assert DateUtils.dateDiffInDaysIgnoreTime(d2_b, d1_b) == -1;
 
         assert DateUtils.dateDiffInDaysIgnoreTime(d3, d4) == 31;
-        assert DateUtils.dateDiffInDaysIgnoreTime(d4, d3) == -31; 
+        assert DateUtils.dateDiffInDaysIgnoreTime(d4, d3) == -31;
     }
 
     @Test
@@ -227,10 +237,15 @@ public class DateUtilsTest extends BaseTest
     @Test
     public void testDurationToNow()
     {
-        Date now = new Date();
-        Date d = DateUtils.newDateFrom(now, Calendar.DAY_OF_YEAR, -10);
-        assert DateUtils.durationToNow(d).equals("1 week and 3 days");
-        assert DateUtils.durationToNow(now).equals("moments");
+        DateTime ref = new DateTime();
+        DateTime refMin45s = ref.minusSeconds(45);
+        DateTime refMin1HourAnd10s = ref.minusHours(1).minusSeconds(10);
+        DateTime refMin10Days = ref.minusDays(10);
+
+        assertEquals(DateUtils.durationToDate(ref, refMin10Days), "1 week and 3 days");
+        assertEquals(DateUtils.durationToDate(ref, refMin1HourAnd10s), "1 hour and 10 seconds");
+        assertEquals(DateUtils.durationToDate(ref, refMin45s), "45 seconds");
+        assertEquals(DateUtils.durationToDate(ref, ref), "moments");
     }
 
     @Test
@@ -244,7 +259,7 @@ public class DateUtilsTest extends BaseTest
         // all days, plus today
         assert days.size() == 16;
 
-        for (Date check = days.get(0); check.before(now);  check = DateUtils.newDateFrom(check, Calendar.DAY_OF_YEAR, 1), i++)
+        for (Date check = days.get(0); check.before(now); check = DateUtils.newDateFrom(check, Calendar.DAY_OF_YEAR, 1), i++)
         {
             assert days.get(i).equals(check);
         }

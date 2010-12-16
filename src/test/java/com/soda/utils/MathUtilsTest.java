@@ -2,7 +2,7 @@ package com.soda.utils;
 
 import com.soda.BaseTest;
 import org.testng.annotations.Test;
-import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
