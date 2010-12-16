@@ -202,13 +202,9 @@ public class DateUtils
         return list;
     }
 
-    /**
-     * @param date the beginning of the intervalle
-     * @return an (english) string representation of duration from <code>date</code> to now.
-     */
-    public static String durationToNow(Date date)
+    protected static String durationToDate(DateTime reference, DateTime date)
     {
-        Interval interval = new Interval(new DateTime(date), new DateTime());
+        Interval interval = new Interval(date, reference);
         Period p = interval.toPeriod();
         //System.out.println(">" + date + " - " + new Date() + " --- " + p.getSeconds());
 
@@ -221,16 +217,29 @@ public class DateUtils
         String seconds = p.getSeconds() == 0 ? "" : p.getSeconds() == 1 ? "1 second " : p.getSeconds() + " seconds ";
 
         List<String> fields = Arrays.asList(years, months, weeks, days, hours, minutes, seconds);
+        fields = CollectionUtils.grep(fields, new CollectionUtils.Condition<String>()
+        {
+            public boolean keep(String element) { return !element.isEmpty(); }
+        });
         String result = "";
         Integer lastNonNullField = null;
         for (int i=fields.size()-1; i>=0; i--)
         {
             String field = fields.get(i);
             if (lastNonNullField == null && !field.isEmpty()) lastNonNullField = i;
-            result = field + (lastNonNullField != null && lastNonNullField == i+1 ? "and " : "") + result;
+            result = field + (lastNonNullField != null && lastNonNullField == i+1 && fields.size() > 1 ? "and " : "") + result;
         }
 
         return interval.toDurationMillis() < 1000  ? "moments" : StringUtils.chop(result, ' ');
+    }
+
+    /**
+     * @param date the beginning of the intervalle
+     * @return an (english) string representation of duration from <code>date</code> to now.
+     */
+    public static String durationToNow(Date date)
+    {
+        return durationToDate(new DateTime(), new DateTime(date));
     }
 
     /**
