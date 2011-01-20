@@ -322,4 +322,20 @@ public class DateUtils
         if (d2 == null) return d1;
         return (d1.before(d2)) ? d2 : d1;
     }
+
+    public static int dateDiffInMonths(Date start, Date end)
+    {
+        if (start == null || end == null) return 0;
+        if (end.before(start)) swap(start, end);
+
+        Period p = new Interval(start.getTime(), end.getTime()).toPeriod();
+        return p.getYears() * 12 + p.getMonths();
+    }
+
+    public static void swap(Date d1, Date d2)
+    {
+        Long t2 = d2.getTime();
+        d2.setTime(d1.getTime());
+        d1.setTime(t2);
+    }
 }
